@@ -33,7 +33,9 @@ class App {
 
   middlewares () {
     this.express.use(express.json())
-    this.express.use(Sentry.Handlers.requestHandler())
+    if (process.env.NODE_ENV === 'production') {
+      this.express.use(Sentry.Handlers.requestHandler())
+    }
   }
 
   routes () {
