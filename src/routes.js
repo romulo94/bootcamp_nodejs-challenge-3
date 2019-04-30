@@ -38,6 +38,7 @@ routes.delete('/ads/:id', handle(controllers.AdController.destroy))
 /**
  * Purchase
  */
+routes.get('/purchases', handle(controllers.PurchaseController.index))
 routes.post(
   '/purchases',
   validate(validators.Purchase),

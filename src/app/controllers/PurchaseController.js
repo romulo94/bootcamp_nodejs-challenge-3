@@ -5,6 +5,15 @@ const PurchaseMail = require('../jobs/PurchaseMail')
 const Queue = require('../services/Queue')
 
 class PurchaseController {
+  async index (req, res) {
+    const purchaseAll = await Purchase.find().populate('ad')
+    const purchase = purchaseAll.filter(el => {
+      return el.ad.author == req.userId
+    })
+
+    return res.json(purchase)
+  }
+
   async store (req, res) {
     const { ad, content } = req.body
 
@@ -22,19 +31,19 @@ class PurchaseController {
       content
     }).save()
 
-    return res.json({ purchase: purchase })
+    return res.json(purchase)
   }
 
   async update (req, res) {
     const purchase = await Purchase.findById(req.params.id).populate('ad')
 
-    const adNew = await Ad.findByIdAndUpdate(
+    const ad = await Ad.findByIdAndUpdate(
       purchase.ad.id,
       { purchasedBy: req.params.id },
       { new: true }
     )
 
-    return res.json(adNew)
+    return res.json(ad)
   }
 }
 

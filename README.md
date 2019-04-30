@@ -1,6 +1,6 @@
 # bootcamp_nodejs-challenge-3
 
-Código do desafio produzido no primeiro módulo do Bootcamp de NodeJS
+Código do desafio produzido no terceiro módulo do Bootcamp de NodeJS
 
 ## Desafio 3
 
