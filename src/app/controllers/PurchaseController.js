@@ -6,7 +6,10 @@ const Queue = require('../services/Queue')
 
 class PurchaseController {
   async index (req, res) {
-    const purchaseAll = await Purchase.find().populate('ad')
+    const purchaseAll = await Purchase.find().populate([
+      { path: 'ad' },
+      { path: 'interested', select: ['_id', 'name', 'email'] }
+    ])
     const purchase = purchaseAll.filter(el => {
       return el.ad.author == req.userId
     })
